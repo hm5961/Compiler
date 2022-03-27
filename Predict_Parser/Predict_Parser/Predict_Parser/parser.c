@@ -20,9 +20,18 @@
 5. 그리고 왼쪽 항은 term, 오른쪽 항은 factor을 적용한다.
 6. + 또는 - 일 경우 1번 또는 2번 규칙을 적용한다.
 7. 그리고 왼쪽항은 expr 오른쪽 항은 term으로 적용한다.
+8. $나오면 스탑 리딩
 */
 
+/*
+트리 구조
+*/
 
+/*
+if char[now]의 타입과 char[now+1]이 같으면 error
+타입 -> 숫자 and 연산자
+==> 이게 main에 있는 lookahead = nexttoken();
+*/
 void match(char token);
 char nexttoken();
 
