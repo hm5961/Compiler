@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<errno.h>
 #include<string.h>
+
 /* 
 1. expr → expr + term {print(1)}
 2. expr → expr ? term {print(2)}
@@ -12,7 +13,6 @@
 7. factor → ( expr ) {print(7)}
 8. factor → 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 */
-
 /*
 우측 기준 변환
 */
@@ -37,16 +37,19 @@ if char[now]의 타입과 char[now+1]이 같으면 error
 타입 -> 숫자 and 연산자
 ==> 이게 main에 있는 lookahead = nexttoken();
 */
+
 void match(char token);
 char nexttoken();
 char rest();
 char term();
 char expr();
+char exp();
 
 char lookahead;
 
 void main() {
 	lookahead = nexttoken();
+	exp();
 	while (1)
 	{
 		expr();
@@ -78,22 +81,42 @@ void match(char token) {
 	return;
 }
 
-
 char rest() {
 	if (lookahead == '+') {
 		match('+');
 		term();
 		putchar('+');
 		rest();
+		putchar(1);
 	}
 	else if (lookahead == '-') {
 		match('-');
 		term();
 		putchar('-');
 		rest();
+		putchar(2);
 	}
-	return;
+	return putchar(3);
 }
+
+char rest2() {
+	if (lookahead == '*') {
+		match('*');
+		term();
+		putchar('*');
+		rest();
+		putchar(4);
+	}
+	else if (lookahead == '/') {
+		match('/');
+		term();
+		putchar('/');
+		rest();
+		putchar(5);
+	}
+	return putchar(6);
+}
+
 char term() {
 	if (isdigit(lookahead)) {
 		putchar(lookahead);
@@ -122,4 +145,8 @@ char expr() {
 			break;
 	}
 	return;
+}
+char exp() {
+	
+	rest();
 }
