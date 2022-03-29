@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 /* 
 expr -> term Rest
 
@@ -12,18 +13,18 @@ term -> factor Rest2
 		| e
 */
 void match(char token);
+void exp();
+void term();
+void factor();
+void rest1();
+void rest2();
 char nexttoken();
-char exp();
-char term();
-char factor();
-char rest();
-char rest2();
-char same(char token);
+
 char lookahead;
 
 void main() {
 	lookahead = nexttoken();
-	exp();
+	//exp();
 	while (1)
 	{
 		exp();
@@ -33,43 +34,22 @@ void main() {
 			return;
 		}
 		else
+		{
 			printf("error\n");
+			exit(1);
+		}
 	}
-	return;
 }
 
 void match(char token) {
 	if (lookahead == token)
 	{
-		//same(token);
 		lookahead = nexttoken();
 	}
-	else {
+	else 
+	{
 		printf("error\n");
 		exit(1);
-	}
-}
-
-char same(char token){
-
-	if(isdigit(token))
-	{
-		if(isdigit(lookahead))
-		{
-			printf("double num error");
-			exit(1);
-		}
-	}
-	else if( token != '(' || token != ')')
-	{
-		if(!isdigit(token))
-		{
-			if(!isdigit(lookahead))
-			{
-				printf("double cal error");
-				exit(1);
-			}
-		}
 	}
 }
 
@@ -83,65 +63,72 @@ char nexttoken() {
 	}
 }
 
-char exp() {
+void exp() {
 	printf("e->\t");
 	term();
 	printf("¢¹3¢·\t");
-	rest();
+	rest1();
 }
 
-char term() {
+void term() {
 	printf("t->\t");
 	factor();
 	printf("¢¹6¢·\t");
 	rest2();
 }
 
-char rest(){
+void rest1(){
+	
 	printf("r1->\t");
-	if(lookahead == '+'){
+	if(lookahead == '+')
+	{
 		match('+');
 		term();
 		printf("¢¹1¢·\t");
-		rest();
+		rest1();
 	}
-	else if(lookahead == '-'){
+	else if(lookahead == '-')
+	{
 		match('-');
 		term();
 		printf("¢¹2¢·\t");
-		rest();
+		rest1();
 	}
 	else if(lookahead == '$')
 	{
-		printf("$ end");
+		printf("¢¹$¢·end");
 		exit(1);
 	}		
-	
-		match(lookahead);
+	else
+		return;
 }
 
-char rest2(){
+void rest2(){
 	printf("r2->\t");
 	if(lookahead == '*'){
 		match('*');
-		printf("¢¹4¢·\t");
 		factor();
+		printf("¢¹4¢·\t");
 		rest2();
 	}
 	else if(lookahead == '/'){
 		match('/');
-		printf("¢¹5¢·\t");
 		factor();
+		printf("¢¹5¢·\t");
 		rest2();
 	}
+	else
+		return;
 }
 
-char factor(){
+void factor(){
+	
 	printf("f->\t");
 	if(isdigit(lookahead))
 	{
 		match(lookahead);
 	}
+	
 	else if(lookahead == '(')
 	{
 		match(lookahead);
@@ -157,8 +144,10 @@ char factor(){
 			exit(1);
 		}
 	}
+	
 	else
 	{
-		putchar("error\n");
+		printf("error\n");
+		exit(1);
 	}
 }
