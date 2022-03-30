@@ -1,16 +1,22 @@
 #include<stdio.h>
 #include<stdlib.h>
 /* 
-expr -> term Rest
+번역계획 수행 예를 참조하여
 
-Rest -> + term print(+) Rest
-	   | - term print(-) Rest
+변환
+expr -> term print(3) rest1
+
+rest1 -> + term print(1) rest1
+	   | - term print(2) rest1
 	   | e
 	   
-term -> factor Rest2
-		| * factor print(*) Rest2
-		| / factor print(/) Rest2
+term -> factor print(6) rest2
+		| * factor print(4) rest2
+		| / factor print(5) rest2
 		| e
+factor -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 
+	| ( exp ) print(7) 
+	| e
 */
 void match(char token);
 void exp();
@@ -24,7 +30,6 @@ char lookahead;
 
 void main() {
 	lookahead = nexttoken();
-	//exp();
 	while (1)
 	{
 		exp();
@@ -55,7 +60,8 @@ void match(char token) {
 
 char nexttoken() {
 	char c;
-	while (1) {
+	while (1) 
+	{
 		c = getchar();
 		if (c == ' ' || c == '\t' || c == '\n' || c == '\0')
 			continue;
@@ -63,40 +69,42 @@ char nexttoken() {
 	}
 }
 
+//위에서 정리한 내용을 바탕으로 출력한다.
+
 void exp() {
 	printf("e->\t");
 	term();
-	printf("��3��\t");
+	printf("3\t"); // 중위 탐색처럼 기능하도록 term실행 이후에 출력하도록 한다.
 	rest1();
 }
 
 void term() {
 	printf("t->\t");
 	factor();
-	printf("��6��\t");
+	printf("¢¹6¢·\t");
 	rest2();
 }
 
 void rest1(){
 	
 	printf("r1->\t");
-	if(lookahead == '+')
+	if(lookahead == '+') // 지금 lookahead가 '+'라면
 	{
 		match('+');
-		term();
-		printf("��1��\t");
-		rest1();
+		term(); // term함수 실행 후
+		printf("¢¹1¢·\t"); // 1을 출력하고
+		rest1(); // 재귀 실행한다.
 	}
 	else if(lookahead == '-')
 	{
 		match('-');
 		term();
-		printf("��2��\t");
+		printf("¢¹2¢·\t");
 		rest1();
 	}
 	else if(lookahead == '$')
 	{
-		printf("��$��end");
+		printf("¢¹$¢·end");
 		exit(1);
 	}		
 	else
@@ -108,13 +116,13 @@ void rest2(){
 	if(lookahead == '*'){
 		match('*');
 		factor();
-		printf("��4��\t");
+		printf("¢¹4¢·\t");
 		rest2();
 	}
 	else if(lookahead == '/'){
 		match('/');
 		factor();
-		printf("��5��\t");
+		printf("¢¹5¢·\t");
 		rest2();
 	}
 	else
@@ -124,23 +132,23 @@ void rest2(){
 void factor(){
 	
 	printf("f->\t");
-	if(isdigit(lookahead))
+	if(isdigit(lookahead)) // 이 위치에 있는 lookahread가 숫자인지 확인
 	{
-		match(lookahead);
+		match(lookahead); // 맞다면 nexttoken으로 넘어가도록 한다.
 	}
 	
-	else if(lookahead == '(')
+	else if(lookahead == '(') //  이 위치에 도착한게 괄호라면
 	{
-		match(lookahead);
-		exp();
-		printf("��7��");
-		if(lookahead == ')')
+		match(lookahead); // nexttoken으로 넘어간 다음
+		exp(); // exp로 넘어가 괄호 쪽 내용이 선실행 되도록 한다.
+		printf("¢¹7¢·");
+		if(lookahead == ')') // '(' 후 ')'에 도달할 경우 
 		{
-			match(lookahead);
+			match(lookahead); // 다음으로 넘어가 계속한다
 		}
-		else
+		else // 아니라면 에러 출력 후 종료한다.
 		{
-			printf("error\n");
+			printf("error\n"); //
 			exit(1);
 		}
 	}
