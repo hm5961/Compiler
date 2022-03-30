@@ -1,11 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 /* 
-ë²ˆì—­ê³„íš ìˆ˜í–‰ ì˜ˆë¥¼ ì°¸ì¡°í•˜ì—¬
-
-ë³€í™˜
+¹ø¿ª°èÈ¹ ¼öÇà ¿¹¸¦ ÂüÁ¶ÇÏ¿©
+º¯È¯
 expr -> term print(3) rest1
-
 rest1 -> + term print(1) rest1
 	   | - term print(2) rest1
 	   | e
@@ -69,42 +67,42 @@ char nexttoken() {
 	}
 }
 
-//ìœ„ì—ì„œ ì •ë¦¬í•œ ë‚´ìš©ì„ ë°”íƒ•ìœ¼ë¡œ ì¶œë ¥í•œë‹¤.
+//À§¿¡¼­ Á¤¸®ÇÑ ³»¿ëÀ» ¹ÙÅÁÀ¸·Î Ãâ·ÂÇÑ´Ù.
 
 void exp() {
 	printf("e->\t");
 	term();
-	printf("3\t"); // ì¤‘ìœ„ íƒìƒ‰ì²˜ëŸ¼ ê¸°ëŠ¥í•˜ë„ë¡ termì‹¤í–‰ ì´í›„ì— ì¶œë ¥í•˜ë„ë¡ í•œë‹¤.
+	printf("3\t"); // ÁßÀ§ Å½»öÃ³·³ ±â´ÉÇÏµµ·Ï term½ÇÇà ÀÌÈÄ¿¡ Ãâ·ÂÇÏµµ·Ï ÇÑ´Ù.
 	rest1();
 }
 
 void term() {
 	printf("t->\t");
 	factor();
-	printf("Â¢Â¹6Â¢Â·\t");
+	printf("6\t");
 	rest2();
 }
 
 void rest1(){
 	
 	printf("r1->\t");
-	if(lookahead == '+') // ì§€ê¸ˆ lookaheadê°€ '+'ë¼ë©´
+	if(lookahead == '+') // Áö±İ lookahead°¡ '+'¶ó¸é
 	{
 		match('+');
-		term(); // termí•¨ìˆ˜ ì‹¤í–‰ í›„
-		printf("Â¢Â¹1Â¢Â·\t"); // 1ì„ ì¶œë ¥í•˜ê³ 
-		rest1(); // ì¬ê·€ ì‹¤í–‰í•œë‹¤.
+		term(); // termÇÔ¼ö ½ÇÇà ÈÄ
+		printf("1\t"); // 1À» Ãâ·ÂÇÏ°í
+		rest1(); // Àç±Í ½ÇÇàÇÑ´Ù.
 	}
 	else if(lookahead == '-')
 	{
 		match('-');
 		term();
-		printf("Â¢Â¹2Â¢Â·\t");
+		printf("2\t");
 		rest1();
 	}
 	else if(lookahead == '$')
 	{
-		printf("Â¢Â¹$Â¢Â·end");
+		printf("$\tend");
 		exit(1);
 	}		
 	else
@@ -116,13 +114,13 @@ void rest2(){
 	if(lookahead == '*'){
 		match('*');
 		factor();
-		printf("Â¢Â¹4Â¢Â·\t");
+		printf("4\t");
 		rest2();
 	}
 	else if(lookahead == '/'){
 		match('/');
 		factor();
-		printf("Â¢Â¹5Â¢Â·\t");
+		printf("5\t");
 		rest2();
 	}
 	else
@@ -132,21 +130,21 @@ void rest2(){
 void factor(){
 	
 	printf("f->\t");
-	if(isdigit(lookahead)) // ì´ ìœ„ì¹˜ì— ìˆëŠ” lookahreadê°€ ìˆ«ìì¸ì§€ í™•ì¸
+	if(isdigit(lookahead)) // ÀÌ À§Ä¡¿¡ ÀÖ´Â lookahread°¡ ¼ıÀÚÀÎÁö È®ÀÎ
 	{
-		match(lookahead); // ë§ë‹¤ë©´ nexttokenìœ¼ë¡œ ë„˜ì–´ê°€ë„ë¡ í•œë‹¤.
+		match(lookahead); // ¸Â´Ù¸é nexttokenÀ¸·Î ³Ñ¾î°¡µµ·Ï ÇÑ´Ù.
 	}
 	
-	else if(lookahead == '(') //  ì´ ìœ„ì¹˜ì— ë„ì°©í•œê²Œ ê´„í˜¸ë¼ë©´
+	else if(lookahead == '(') //  ÀÌ À§Ä¡¿¡ µµÂøÇÑ°Ô °ıÈ£¶ó¸é
 	{
-		match(lookahead); // nexttokenìœ¼ë¡œ ë„˜ì–´ê°„ ë‹¤ìŒ
-		exp(); // expë¡œ ë„˜ì–´ê°€ ê´„í˜¸ ìª½ ë‚´ìš©ì´ ì„ ì‹¤í–‰ ë˜ë„ë¡ í•œë‹¤.
-		printf("Â¢Â¹7Â¢Â·");
-		if(lookahead == ')') // '(' í›„ ')'ì— ë„ë‹¬í•  ê²½ìš° 
+		match(lookahead); // nexttokenÀ¸·Î ³Ñ¾î°£ ´ÙÀ½
+		exp(); // exp·Î ³Ñ¾î°¡ °ıÈ£ ÂÊ ³»¿ëÀÌ ¼±½ÇÇà µÇµµ·Ï ÇÑ´Ù.
+		printf("7\t);
+		if(lookahead == ')') // '(' ÀÌÈÄ ')'¿¡ µµ´ŞÇÒ °æ¿ì 
 		{
-			match(lookahead); // ë‹¤ìŒìœ¼ë¡œ ë„˜ì–´ê°€ ê³„ì†í•œë‹¤
+			match(lookahead); // ´ÙÀ½À¸·Î ³Ñ¾î°¡ °è¼ÓÇÑ´Ù
 		}
-		else // ì•„ë‹ˆë¼ë©´ ì—ëŸ¬ ì¶œë ¥ í›„ ì¢…ë£Œí•œë‹¤.
+		else // ¾Æ´Ï¶ó¸é ¿¡·¯ Ãâ·Â ÈÄ Á¾·áÇÑ´Ù.
 		{
 			printf("error\n"); //
 			exit(1);
