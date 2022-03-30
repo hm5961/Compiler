@@ -69,14 +69,16 @@ char nexttoken() {
 
 //위에서 정리한 내용을 바탕으로 출력한다.
 
-void exp() {
+void exp() 
+{
 	printf("e->\t");
 	term();
 	printf("3\t"); // 중위 탐색처럼 기능하도록 term실행 이후에 출력하도록 한다.
 	rest1();
 }
 
-void term() {
+void term() 
+{
 	printf("t->\t");
 	factor();
 	printf("6\t");
@@ -105,8 +107,6 @@ void rest1(){
 		printf("$\tend");
 		exit(1);
 	}		
-	else
-		return;
 }
 
 void rest2(){
@@ -123,8 +123,6 @@ void rest2(){
 		printf("5\t");
 		rest2();
 	}
-	else
-		return;
 }
 
 void factor(){
