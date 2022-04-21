@@ -1,7 +1,7 @@
 ﻿  parser.c
-D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(22,5): error C2198: 'exp': 호출에 인수가 너무 적습니다.
-D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(23,19): error C3873: '0x2018': 이 문자는 식별자의 첫 문자로 사용할 수 없습니다.
-D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(23,19): error C3872: '0x24': 식별자에는 이 문자를 사용할 수 없습니다.
-D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(23,19): error C3872: '0x2019': 식별자에는 이 문자를 사용할 수 없습니다.
-D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(23,26): error C2065: '‘$’': 선언되지 않은 식별자입니다.
-D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(34,7): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(42,5): error C2198: 'exp': 호출에 인수가 너무 적습니다.
+D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(43,19): error C3873: '0x2018': 이 문자는 식별자의 첫 문자로 사용할 수 없습니다.
+D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(43,19): error C3872: '0x24': 식별자에는 이 문자를 사용할 수 없습니다.
+D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(43,19): error C3872: '0x2019': 식별자에는 이 문자를 사용할 수 없습니다.
+D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(43,26): error C2065: '‘$’': 선언되지 않은 식별자입니다.
+D:\Github\Compiler\Predict_Parser\Predict_Parser\Predict_Parser\parser.c(54,7): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
