@@ -1,0 +1,32 @@
+shift + rclick 
+powershell
+
+flex cbu2
+
+
+소스파일에 파일 3개 넣고
+c에는 define warning 뭐시기( scanf오류 방지)
+
+실행 후 상위폴더 debug에 exe파일 주 폴더로 이동
+
+exe를 powershell로 실행
+
+lexer는 어휘 분석기 ( 입력 판별기 )
+
+
+
+#define WHILE 103
+while { return(WHILE);}
+"=" 이런 식으로 추가가능
+
+lex 수정 후 flex 후 yacc 이런식으로 반복작업 많음
+
+
+
+type a.asm
+
+stacksim a.asm
+
+type sample.cbu
+-> 예시동작 정의
+
