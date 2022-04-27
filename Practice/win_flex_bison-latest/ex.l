@@ -21,6 +21,7 @@ id {letter}({letter}|{digit})*
 if {return(IF); }
 {id} {yylval = install_id(); return(ID);}
 "<=" {yylval= LE; return(RELOP);}
+"//".* {}
 %%
 int install_id() { return(1); }
 main(){ while(1){ tok = yylex(); printf("%d %d\n", tok, yylval);}}
