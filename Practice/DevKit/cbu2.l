@@ -22,8 +22,9 @@ id		{letter}({letter}|{digit})*
 %%
 {ws}	{/* do nothing */}
 {nl}	{lineno++; }
-더하기	{return(ADD); }
+더하기		{return(ADD); }
 빼기		{return(SUB); }
+곱하기		{return(MUL); }
 :=		{return(ASSGN); }
 ;		{return(STMTEND); }
 시작		{return(START); }

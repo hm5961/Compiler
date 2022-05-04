@@ -39,11 +39,12 @@ void codegen(Node* );
 void prtcode(int, int);
 
 void	dwgen();
-int	gentemp();
+int		gentemp();
 void	assgnstmt(int, int);
 void	numassgn(int, int);
 void	addstmt(int, int, int);
 void	substmt(int, int, int);
+void	mulstmt(int, int, int);
 int		insertsym(char *);
 %}
 
@@ -65,6 +66,7 @@ stmt	: 	ID ASSGN expr STMTEND	{ $1->token = ID2; $$=MakeOPTree(ASSGN, $1, $3);}
 
 expr	: 	expr ADD term	{ $$=MakeOPTree(ADD, $1, $3); }
 		|	expr SUB term	{ $$=MakeOPTree(SUB, $1, $3); }
+		|	expr MUL term	{ $$=MakeOPTree(MUL, $1, $3); }
 		|	term
 		;
 
@@ -180,6 +182,9 @@ void prtcode(int token, int val)
 		break;
 	case SUB:
 		fprintf(fp, "-\n");
+		break;
+	case MUL:
+		fprintf(fp, "*\n");
 		break;
 	case ASSGN:
 		fprintf(fp, ":=\n");
